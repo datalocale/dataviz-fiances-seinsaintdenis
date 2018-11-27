@@ -7,22 +7,22 @@ import page from 'page';
 
 import { max } from 'd3-array';
 
-import {makeLigneBudgetId}  from '../../../../shared/js/finance/DocBudgDataStructures';
-import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
-import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
+import { makeLigneBudgetId } from '../../../../shared/js/finance/DocBudgDataStructures';
+import { m52ToAggregated, hierarchicalAggregated, hierarchicalM52 } from '../../../../shared/js/finance/memoized';
+import { default as visit, flattenTree } from '../../../../shared/js/finance/visitHierarchical.js';
 
 import { DF, DI } from '../../../../shared/js/finance/constants';
 
-import {fonctionLabels, natureLabels} from '../../../../../build/finances/m52-strings.json';
+import { fonctionLabels, natureLabels } from '../../../../../build/finances/m52-strings.json';
 
 import StackChart from '../../../../shared/js/components/StackChart';
-import {makeAmountString, default as MoneyAmount} from '../../../../shared/js/components/MoneyAmount';
+import { makeAmountString, default as MoneyAmount } from '../../../../shared/js/components/MoneyAmount';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import DownloadSection from '../../../../shared/js/components/gironde.fr/DownloadSection';
 
-import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
+import { CHANGE_EXPLORATION_YEAR } from '../../constants/actions';
 
 import colorClassById from '../../colorClassById';
 
@@ -65,7 +65,7 @@ interface FinanceElementProps{
 */
 
 
-export function FinanceElement({contentId, RDFI, amountByYear, contextElements, texts, partitionByYear, year, m52Rows, changeExplorationYear, screenWidth}) {
+export function FinanceElement({ contentId, RDFI, amountByYear, contextElements, texts, partitionByYear, year, m52Rows, changeExplorationYear, screenWidth }) {
     const label = texts && texts.label || '';
     const atemporalText = texts && texts.atemporal;
     const temporalText = texts && texts.temporal;
@@ -88,7 +88,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
     let thisYearPartition = partitionByYear.get(year);
 
     let barchartPartitionByYear = partitionByYear;
-    if(contentId === 'DF'){
+    if (contentId === 'DF') {
         // For DF, for the split thing at the end, the whole partition is needed.
         // However, DF-1 === DF-2, so for the barchart, we only want one of them with the label "solidarité"
         barchartPartitionByYear = barchartPartitionByYear.map(partition => {
@@ -101,9 +101,9 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
                 partAmount: df2.partAmount,
                 texts: df2.texts && df2.texts.set('label', [
                     'Actions sociales ',
-                    React.createElement('a', {href: '#!/finance-details/DF-1'}, '(par prestation)'),
+                    React.createElement('a', { href: '#!/finance-details/DF-1' }, '(par prestation)'),
                     ' - ',
-                    React.createElement('a', {href: '#!/finance-details/DF-2'}, '(par public)')
+                    React.createElement('a', { href: '#!/finance-details/DF-2' }, '(par public)')
                 ]),
                 url: undefined
             });
@@ -116,17 +116,17 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
     }
 
     const legendItemIds = barchartPartitionByYear
-    .map(partition => partition.map(part => part.contentId).toSet())
-    .toSet().flatten().toArray()
-    .sort( (lid1, lid2) => {
-        return partitionIdsInOrder.indexOf(lid1) - partitionIdsInOrder.indexOf(lid2)
-    } );
+        .map(partition => partition.map(part => part.contentId).toSet())
+        .toSet().flatten().toArray()
+        .sort((lid1, lid2) => {
+            return partitionIdsInOrder.indexOf(lid1) - partitionIdsInOrder.indexOf(lid2)
+        });
 
     const legendItems = legendItemIds.map(id => {
         let found;
 
         barchartPartitionByYear.find(partition => {
-            found = partition.find(p => p.contentId === id )
+            found = partition.find(p => p.contentId === id)
             return found;
         })
 
@@ -144,28 +144,30 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
     const RDFIText = RDFI === DF ?
         'Dépense de fonctionnement' :
         RDFI === DI ?
-            `Dépense d'investissement`:
+            `Dépense d'investissement` :
             '';
 
     const isLeaf = !(thisYearPartition && thisYearPartition.size >= 2);
 
-    return React.createElement('article', {className: 'finance-element'},
-        React.createElement(PageTitle, {text: RDFI ?
-            `${RDFIText} - ${label} en ${year}` :
-            `${label} en ${year}`}),
+    return React.createElement('article', { className: 'finance-element' },
+        React.createElement(PageTitle, {
+            text: RDFI ?
+                `${RDFIText} - ${label} en ${year}` :
+                `${label} en ${year}`
+        }),
         React.createElement('section', {},
-            React.createElement('div', {className: 'top-infos'},
+            React.createElement('div', { className: 'top-infos' },
                 contextElements ? React.createElement(FinanceElementContext, { contextElements }) : undefined,
                 React.createElement('div', {},
-                    React.createElement('h2', {}, React.createElement(RollingNumber, {amount})),
-                    atemporalText ? React.createElement('div', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined
+                    React.createElement('h2', {}, React.createElement(RollingNumber, { amount })),
+                    atemporalText ? React.createElement('div', { className: 'atemporal', dangerouslySetInnerHTML: { __html: atemporalText } }) : undefined
                 )
             )
         ),
 
         React.createElement('section', {},
-            React.createElement(SecundaryTitle, {text: 'Évolution sur ces dernières années'}),
-            temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined,
+            React.createElement(SecundaryTitle, { text: 'Évolution sur ces dernières années' }),
+            temporalText ? React.createElement('div', { className: 'temporal', dangerouslySetInnerHTML: { __html: temporalText } }) : undefined,
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ?
                     800 :
@@ -187,8 +189,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
             })
         ),
 
-        isLeaf && m52Rows ? React.createElement('section', { className: 'raw-data'},
-            React.createElement(SecundaryTitle, {text: `Consultez ces données en détail à la norme comptable M52 pour l'année ${year}`}),
+        isLeaf && m52Rows ? React.createElement('section', { className: 'raw-data' },
+            React.createElement(SecundaryTitle, { text: `Consultez ces données en détail à la norme comptable M52 pour l'année ${year}` }),
             React.createElement('table', {},
                 React.createElement('thead', {},
                     React.createElement('tr', {},
@@ -199,25 +201,25 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
                 ),
                 React.createElement('tbody', {},
                     m52Rows
-                    .sort((r1, r2) => r2['MtReal'] - r1['MtReal'])
-                    .map(row => {
-                        return React.createElement('tr', {title: makeLigneBudgetId(row)},
-                            React.createElement('td', {}, fonctionLabels[row['Fonction']]),
-                            React.createElement('td', {}, natureLabels[row['Nature']]),
-                            React.createElement('td', {},
-                                React.createElement(MoneyAmount, {amount: row['MtReal']})
+                        .sort((r1, r2) => r2['MtReal'] - r1['MtReal'])
+                        .map(row => {
+                            return React.createElement('tr', { title: makeLigneBudgetId(row) },
+                                React.createElement('td', {}, fonctionLabels[row['Fonction']]),
+                                React.createElement('td', {}, natureLabels[row['Nature']]),
+                                React.createElement('td', {},
+                                    React.createElement(MoneyAmount, { amount: row['MtReal'] })
+                                )
                             )
-                        )
-                    })
+                        })
                 )
             ),
             React.createElement(
                 DownloadSection,
                 {
-                    title: `Données brutes sur datalocale.fr`,
+                    title: `Données brutes sur opendata.seinesaintdenis.fr`,
                     items: [
                         {
-                            text: 'Comptes administratifs du Département de la Gironde au format TOTEM',
+                            text: 'Comptes administratifs du Département de la Seine-Saint-Denis au format TOTEM',
                             url: 'https://www.datalocale.fr/dataset/comptes-administratifs-budget-principal-donnees-budgetaires-du-departement-de-la-gironde1'
                         }
                     ]
@@ -230,15 +232,15 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
 
 
 
-export function makePartition(element, totalById, textsById, possibleChildrenIds){
-    if(!element){
+export function makePartition(element, totalById, textsById, possibleChildrenIds) {
+    if (!element) {
         return new List();
     }
 
     let children = element.children;
     children = children && typeof children.toList === 'function' ? children.toList() : children;
 
-    if(!possibleChildrenIds){
+    if (!possibleChildrenIds) {
         possibleChildrenIds = children.map(c => c.id);
     }
 
@@ -264,7 +266,7 @@ export function makePartition(element, totalById, textsById, possibleChildrenIds
 
 
 
-export function makeElementById(hierAgg, hierM52 = {}){
+export function makeElementById(hierAgg, hierM52 = {}) {
     let elementById = new ImmutableMap();
 
     flattenTree(hierAgg).forEach(aggHierNode => {
@@ -278,9 +280,9 @@ export function makeElementById(hierAgg, hierM52 = {}){
     return elementById;
 }
 
-function fillChildToParent(tree, wm){
+function fillChildToParent(tree, wm) {
     visit(tree, e => {
-        if(e.children){
+        if (e.children) {
             e.children.forEach(c => {
                 wm.set(c, e);
             })
@@ -288,22 +290,22 @@ function fillChildToParent(tree, wm){
     });
 }
 
-function makeContextList(element, childToParent){
+function makeContextList(element, childToParent) {
     let contextList = [];
     let next = element;
 
-    while(next){
+    while (next) {
         contextList.push(next);
         next = childToParent.get(next);
     }
 
     contextList = contextList
-    // furtherest context first
-    .reverse()
-    // remove TOTAL
-    .slice(1);
+        // furtherest context first
+        .reverse()
+        // remove TOTAL
+        .slice(1);
 
-    if(contextList.length > 4){
+    if (contextList.length > 4) {
         const [c1, c2, c3] = contextList;
         const [last] = contextList.slice(-1);
 
@@ -321,8 +323,8 @@ export default connect(
         const isM52Element = financeDetailId.startsWith('M52-');
 
         let RDFI;
-        if(isM52Element){
-            RDFI = financeDetailId.slice(4, 4+2);
+        if (isM52Element) {
+            RDFI = financeDetailId.slice(4, 4 + 2);
         }
 
         const m52Instruction = docBudgByYear.get(explorationYear);
@@ -331,8 +333,8 @@ export default connect(
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
 
         const childToParent = new WeakMap();
-        if(m52Instruction){
-            if(hierM52)
+        if (m52Instruction) {
+            if (hierM52)
                 fillChildToParent(hierM52, childToParent);
 
             fillChildToParent(hierAgg, childToParent);
@@ -348,7 +350,7 @@ export default connect(
         const elementByIdByYear = docBudgByYear.map(m52i => {
             return makeElementById(
                 hierarchicalAggregated(m52ToAggregated(m52i, corrections)),
-                RDFI ? hierarchicalM52(m52i, RDFI): undefined
+                RDFI ? hierarchicalM52(m52i, RDFI) : undefined
             );
         });
 
@@ -359,13 +361,13 @@ export default connect(
         // Depending on the year, all elements may not have the same children ids.
         // This is the set of all possible ids for the given years
         const displayedElementPossibleChildrenIds = displayedElementByYear.map(element => {
-            if(!element)
+            if (!element)
                 return new ImmutableSet();
 
             let children = element.children;
             children = children && typeof children.toList === 'function' ? children.toList() : children;
 
-            if(!children)
+            if (!children)
                 return new ImmutableSet();
 
             return new ImmutableSet(children).map(child => child.id);
@@ -385,8 +387,8 @@ export default connect(
 
         const m52Rows = element && (!element.children || element.children.size === 0) ?
             (isM52Element ?
-                 element.elements :
-                 element.elements.first()['M52Rows']
+                element.elements :
+                element.elements.first()['M52Rows']
             ) :
             undefined;
 
@@ -398,12 +400,12 @@ export default connect(
             amountByYear,
             contextElements: contextList.map((c, i) => ({
                 id: c.id,
-                url : c.id !== displayedContentId ? '#!/finance-details/'+c.id : undefined,
-                proportion : c.total/contextList[0].total,
-                colorClass : colorClassById.get(c.id),
+                url: c.id !== displayedContentId ? '#!/finance-details/' + c.id : undefined,
+                proportion: c.total / contextList[0].total,
+                colorClass: colorClassById.get(c.id),
                 label: textsById.get(c.id).label +
-                    (contextList.length >= 2 && i === contextList.length -1 ?
-                        ` (${(c.total*100/contextList[0].total).toFixed(1)}%)` :
+                    (contextList.length >= 2 && i === contextList.length - 1 ?
+                        ` (${(c.total * 100 / contextList[0].total).toFixed(1)}%)` :
                         '')
             })),
             texts,
@@ -415,7 +417,7 @@ export default connect(
 
     },
     dispatch => ({
-        changeExplorationYear(year){
+        changeExplorationYear(year) {
             dispatch({
                 type: CHANGE_EXPLORATION_YEAR,
                 year
