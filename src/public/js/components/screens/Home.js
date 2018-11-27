@@ -27,7 +27,7 @@ export function Home({
 
     return React.createElement('article', { className: 'home' },
         React.createElement('div', {},
-            React.createElement(PageTitle, { text: "Un budget au département de la Sein Saint Denis" }),
+            React.createElement(PageTitle, { text: "Un budget au département de la Seine Saint Denis" }),
             React.createElement(Markdown, {}, `Ici on peut dire des choses.`)
         ),
 
