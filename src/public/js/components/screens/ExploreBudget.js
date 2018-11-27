@@ -78,16 +78,7 @@ export function TotalBudget({
             React.createElement(
                 Markdown,
                 {},
-                `Le contexte financier dans lequel s’est déroulée l’exécution de ce troisième budget de la mandature a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et par une modification des compétences résultant de la mise en œuvre des transferts de compétences avec la Région et Bordeaux Métropole issus des lois MAPTAM de 2014 et NOTRe de 2015.
-
-Dans un contexte national où les contraintes financières se sont durcies, l’année 2017 confirme le dynamisme des dépenses de solidarité obligatoires et incompressibles et la difficulté d’accentuer encore la maitrise des dépenses de gestion courante.
-
-Le Département voit également ses recettes de fonctionnement évoluer plus favorablement que prévu grâce aux droits de mutation recette conjoncturelle mais non pérenne liée au fort dynamisme de l’immobilier et à l’attraction du département.
-
-Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
-
--	Une épargne brute qui s’améliore fortement
--	Une réduction importante du besoin de financement par l’emprunt`
+                `On peux dire des choses ici spécifiquement sur le CA de l'année`
             )
         ),
 
@@ -268,18 +259,18 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
             }),
             m52Instruction
                 ? React.createElement(M52ByFonction, {
-                      m52Instruction,
-                      urlByFonction: byFonction,
-                      labelsById,
-                      screenWidth
-                  })
+                    m52Instruction,
+                    urlByFonction: byFonction,
+                    labelsById,
+                    screenWidth
+                })
                 : undefined,
             React.createElement(DownloadSection, {
-                title: `Données brutes sur datalocale.fr`,
+                title: `Données brutes sur openda.seinesaintdenis.fr`,
                 items: [
                     {
                         text:
-                            "Comptes administratifs du Département de la Gironde au format XML TOTEM",
+                            "Comptes administratifs du Département de la Seine-Saint-Denis au format XML TOTEM",
                         url:
                             "https://www.datalocale.fr/dataset/comptes-administratifs-budget-principal-donnees-budgetaires-du-departement-de-la-gironde1"
                     }
@@ -320,37 +311,37 @@ export default connect(
             // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33
             constructionAmounts: m52Instruction
                 ? {
-                      DotationEtat: totalById.get("RF-5"),
-                      FiscalitéDirecte: totalById.get("RF-1"),
-                      FiscalitéIndirecte: sum(
-                          ["RF-2", "RF-3", "RF-4"].map(i => totalById.get(i))
-                      ),
-                      RecettesDiverses:
-                          totalById.get("RF") -
-                          sum(
-                              ["RF-1", "RF-2", "RF-3", "RF-4", "RF-5"].map(i =>
-                                  totalById.get(i)
-                              )
-                          ),
+                    DotationEtat: totalById.get("RF-5"),
+                    FiscalitéDirecte: totalById.get("RF-1"),
+                    FiscalitéIndirecte: sum(
+                        ["RF-2", "RF-3", "RF-4"].map(i => totalById.get(i))
+                    ),
+                    RecettesDiverses:
+                        totalById.get("RF") -
+                        sum(
+                            ["RF-1", "RF-2", "RF-3", "RF-4", "RF-5"].map(i =>
+                                totalById.get(i)
+                            )
+                        ),
 
-                      Solidarité: totalById.get("DF-1"),
-                      Interventions: totalById.get("DF-3"),
-                      DépensesStructure:
-                          totalById.get("DF") -
-                          sum(["DF-1", "DF-3"].map(i => totalById.get(i))),
+                    Solidarité: totalById.get("DF-1"),
+                    Interventions: totalById.get("DF-3"),
+                    DépensesStructure:
+                        totalById.get("DF") -
+                        sum(["DF-1", "DF-3"].map(i => totalById.get(i))),
 
-                      Emprunt: totalById.get("RI-EM"),
-                      RIPropre: totalById.get("RI") - totalById.get("RI-EM"),
+                    Emprunt: totalById.get("RI-EM"),
+                    RIPropre: totalById.get("RI") - totalById.get("RI-EM"),
 
-                      RemboursementEmprunt: totalById.get("DI-EM"),
-                      Routes: totalById.get("DI-1-2"),
-                      Colleges: totalById.get("DI-1-1"),
-                      Amenagement:
-                          totalById.get("DI-1-3") +
-                          totalById.get("DI-1-4") +
-                          totalById.get("DI-1-5"),
-                      Subventions: totalById.get("DI-2")
-                  }
+                    RemboursementEmprunt: totalById.get("DI-EM"),
+                    Routes: totalById.get("DI-1-2"),
+                    Colleges: totalById.get("DI-1-1"),
+                    Amenagement:
+                        totalById.get("DI-1-3") +
+                        totalById.get("DI-1-4") +
+                        totalById.get("DI-1-5"),
+                    Subventions: totalById.get("DI-2")
+                }
                 : undefined,
             urls: {
                 expenditures: "#!/finance-details/" + EXPENDITURES,
