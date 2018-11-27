@@ -78,16 +78,7 @@ export function TotalBudget({
             React.createElement(
                 Markdown,
                 {},
-                `Le contexte financier dans lequel s’est déroulée l’exécution de ce troisième budget de la mandature a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et par une modification des compétences résultant de la mise en œuvre des transferts de compétences avec la Région et Bordeaux Métropole issus des lois MAPTAM de 2014 et NOTRe de 2015.
-
-Dans un contexte national où les contraintes financières se sont durcies, l’année 2017 confirme le dynamisme des dépenses de solidarité obligatoires et incompressibles et la difficulté d’accentuer encore la maitrise des dépenses de gestion courante.
-
-Le Département voit également ses recettes de fonctionnement évoluer plus favorablement que prévu grâce aux droits de mutation recette conjoncturelle mais non pérenne liée au fort dynamisme de l’immobilier et à l’attraction du département.
-
-Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
-
--	Une épargne brute qui s’améliore fortement
--	Une réduction importante du besoin de financement par l’emprunt`
+                `Des choses contextuelles à l'année présentée`
             )
         ),
 
