@@ -216,10 +216,10 @@ export function FinanceElement({ contentId, RDFI, amountByYear, contextElements,
             React.createElement(
                 DownloadSection,
                 {
-                    title: `Données brutes sur opendata.seinesaintdenis.fr`,
+                    title: `Données brutes sur datalocale.fr`,
                     items: [
                         {
-                            text: 'Comptes administratifs du Département de la Seine-Saint-Denis au format TOTEM',
+                            text: 'Comptes administratifs du Département de la Gironde au format TOTEM',
                             url: 'https://www.datalocale.fr/dataset/comptes-administratifs-budget-principal-donnees-budgetaires-du-departement-de-la-gironde1'
                         }
                     ]
