@@ -1,4 +1,4 @@
-# Language and env
+# Language and environnement
 
 language: node_js
 node_js: 'node'
@@ -16,7 +16,6 @@ install:
 
 script:
   - npm run build-demo
-  - npm test
 
 deploy:
   skip_cleanup: true
