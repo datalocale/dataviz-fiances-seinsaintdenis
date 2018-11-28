@@ -264,18 +264,7 @@ export function TotalBudget({
                     labelsById,
                     screenWidth
                 })
-                : undefined,
-            React.createElement(DownloadSection, {
-                title: `Données brutes sur datalocale.fr`,
-                items: [
-                    {
-                        text:
-                            "Comptes administratifs du Département de la Gironde au format XML TOTEM",
-                        url:
-                            "https://www.datalocale.fr/dataset/comptes-administratifs-budget-principal-donnees-budgetaires-du-departement-de-la-gironde1"
-                    }
-                ]
-            })
+                : undefined
         )
     );
 }
