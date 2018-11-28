@@ -33,38 +33,38 @@ export const urls = {
     // finance data
     [COMPTES_ADMINISTRATIFS]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/22`,
-        "demo": `/dataviz-finances-gironde/build/finances/doc-budgs.json`,
+        "demo": `/dataviz-finances-seinesaintdenis/build/finances/doc-budgs.json`,
         "development": `../build/finances/doc-budgs.json`,
     }[env],
     [CORRECTIONS_AGGREGATED]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/14`,
-        "demo": `/dataviz-finances-gironde/data/finances/corrections-agregation.csv`,
+        "demo": `/dataviz-finances-seinesaintdenis/data/finances/corrections-agregation.csv`,
         "development": `/data/finances/corrections-agregation.csv`
     }[env],
 
     // texts
     [AGGREGATED_ATEMPORAL]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/16`,
-        "demo": `/dataviz-finances-gironde/data/texts/aggregated-atemporal.csv`,
+        "demo": `/dataviz-finances-seinesaintdenis/data/texts/aggregated-atemporal.csv`,
         "development": `../data/texts/aggregated-atemporal.csv`
     }[env],
     [AGGREGATED_TEMPORAL]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/15`,
-        "demo":  `/dataviz-finances-gironde/data/texts/aggregated-temporal.csv`,
+        "demo": `/dataviz-finances-seinesaintdenis/data/texts/aggregated-temporal.csv`,
         "development": `../data/texts/aggregated-temporal.csv`
     }[env],
 
     // HTML Carte présence
     [CARTE_PRESENCE_HTML]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/18`,
-        "demo": `/dataviz-finances-gironde/public/carte-presence.html`,
+        "demo": `/dataviz-finances-seinesaintdenis/public/carte-presence.html`,
         "development": `../public/carte-presence.html`
     }[env],
 
     // Vidéo de l'animation
     [ANIMATION_VIDEO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/21`,
-        "demo": `/dataviz-finances-gironde/videos/BLOUBLOU_V2_5.mp4`,
+        "demo": `/dataviz-finances-seinesaintdenis/videos/BLOUBLOU_V2_5.mp4`,
         "development": '../videos/BLOUBLOU_V2_5.mp4'
     }[env],
 
