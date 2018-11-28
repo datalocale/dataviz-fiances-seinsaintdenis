@@ -1,5 +1,5 @@
 {
-  "name": "dataviz-gironde",
+  "name": "dataviz-seinesaintdenis",
   "private": true,
   "version": "1.0.0",
   "description": "...",
@@ -30,14 +30,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/datalocale/dataviz-finances-gironde"
+    "url": "https://github.com/datalocale/dataviz-finances-seinesaintdenis"
   },
   "author": "dtc innovation",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/datalocale/dataviz-finances-gironde/issues"
+    "url": "https://github.com/datalocale/dataviz-finances-seinesaintdenis/issues"
   },
-  "homepage": "https://github.com/datalocale/dataviz-finances-gironde",
+  "homepage": "https://github.com/datalocale/dataviz-finances-seinesaintdenis",
   "browserify": {
     "transform": [
       [
